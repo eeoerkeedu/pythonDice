@@ -1,6 +1,8 @@
 import numpy as np
 
-msg = "Roll a dice!"
-print(msg)
+from icepool import d
 
-print(np.random.randint(1,6))
+d6 = d(6)
+# print(3 @ d6)
+
+print(3 @ d6.reroll([6], depth=1))
