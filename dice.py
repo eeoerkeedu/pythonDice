@@ -1,4 +1,4 @@
-hits= 12 
+attacks= 12 
 clash= 4
 reroll= False
 rr6s= False
@@ -6,7 +6,7 @@ relentless= False
 torrential= False
 rr1s=False
 
-defence = 1
+defence = 3
 cleave = 0
 hardened = 0
 evasion = 0
@@ -21,10 +21,13 @@ smite = False
 tenacious = False
 bastion = 0
 
-def defenseCheck(hits, defence):
-	pass
+def defenseCheck():
+	hits = hitsCheck()
+	defProb = .166666 * defence
+	wounds = hits - (hits * defProb)
+	print("With a Defense of", defence, "you will average", int(wounds), "wounds!")
 
-def hitsCheck(attacks, clash, reroll, rr6s, relentless, torrential, rr1s):
+def hitsCheck():
 	hitProb = .166666 * clash
 	hits = attacks * hitProb
 	# if reroll == True and rr6s == True:
@@ -54,6 +57,7 @@ def hitsCheck(attacks, clash, reroll, rr6s, relentless, torrential, rr1s):
 attackDict = {"hits": 12, "clash":4, "reroll": False, "rr6s": False, "relentless": False, "torrential": False, "rr1s":False}
 defenseDict = {"defence": 2, "cleave": 0, "hardened": 0, "evasion": 1, "deadly": False, "precice": False, "defRR": False, "rr6def": False, "rr1def": False, "shield": False, "lineBreaker": False, "smite": False, "tenacious": False, "bastion": False}
 
-hitsCheck(hits, clash, reroll, rr6s, relentless, torrential, rr1s)
+# hitsCheck()
+defenseCheck()
 
 
