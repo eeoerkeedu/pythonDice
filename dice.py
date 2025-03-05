@@ -1,13 +1,16 @@
+# standard d6 distirbution assumption
 d6 = .166666
 
+# offensive modifiers
 attacks= 25 
-clash= 4
-reroll= False
-rr6s= False
-relentless= False
-torrential= False
-rr1s=False
+clash = 4
+reroll = False
+rr6s = False
+relentless = False
+torrential = False
+rr1s = False
 
+# Defnesive modifiers
 defence = 2
 cleave = 0
 hardened = 0
@@ -16,15 +19,17 @@ deadly = False
 precice = False
 defRR = False
 rr6def = False
-rr1def = True
+rr1def = False
 shield = True
 lineBreaker = False
 smite = False
-tenacious = 0
+tenacious = 1
 bastion = 0
 
 def defenseCheck():
 	hits = hitsCheck()
+	wounds = 0
+	evasionChecker = False
 	modifiedDefence = defence
 	if shield == True and lineBreaker == False:
 		modifiedDefence += 1
@@ -35,32 +40,44 @@ def defenseCheck():
 		if cvh < 0: cvh = 0
 		modifiedDefence -= cvh
 	if evasion > modifiedDefence or smite == True:
-		defProb = d6 * evasion
-		wounds = hits - (hits * defProb)
-		print("With an Evasion of", evasion, "you will average", int(wounds), "wounds!")
-		return wounds
+		evasionChecker = True
+		modifiedDefence = evasion
+
+	if precice == True:
+		ones = hits * d6
+		saves = ones * (evasion * d6)
+		wounds += ones - saves
+		hits -= ones
 
 	defProb = d6 * modifiedDefence
-	wounds = hits - (hits * defProb)
+	missedSaves = hits - (hits * defProb)
 	if defRR == True:
-		rerolledSaves = wounds * defProb
-		wounds -= rerolledSaves
+		rerolledSaves = missedSaves * defProb
+		missedSaves -= rerolledSaves
 	if rr6def == True and defRR == False and rr1def == False:
-		sixes = wounds * d6
-		wounds -= sixes
+		sixes = missedSaves * d6
+		missedSaves -= sixes
 	if rr1def == True and defRR == False and rr6def == False:
-		ones = wounds * d6
-		wounds += ones
+		ones = missedSaves * d6
+		missedSaves += ones
+	if deadly == True:
+		sixes = missedSaves * d6
+		sixes -= tenacious
+		wounds += sixes
+	if tenacious > 0:
+		missedSaves -= tenacious
+	
+	wounds += missedSaves
 
-	print("With a Defense of", modifiedDefence, "you will average", int(wounds), "wounds!")
+	if evasionChecker == True:
+		print("With an Evasion of", evasion, "you will average", int(wounds), "wounds!")
+	else:
+		print("With a Defense of", modifiedDefence, "you will average", int(wounds), "wounds!")
 	return wounds
 
 def hitsCheck():
 	hitProb = d6 * clash
 	hits = attacks * hitProb
-	# if reroll == True and rr6s == True:
-	# 	print("You may not have rr6 and Reroll all dice, please choose one or the other")
-	# 	return
 	if reroll == True:
 		rerolledHits = (attacks - hits) * hitProb
 		hits += rerolledHits
@@ -85,7 +102,6 @@ def hitsCheck():
 attackDict = {"hits": 12, "clash":4, "reroll": False, "rr6s": False, "relentless": False, "torrential": False, "rr1s":False}
 defenseDict = {"defence": 2, "cleave": 0, "hardened": 0, "evasion": 1, "deadly": False, "precice": False, "defRR": False, "rr6def": False, "rr1def": False, "shield": False, "lineBreaker": False, "smite": False, "tenacious": False, "bastion": False}
 
-# hitsCheck()
 defenseCheck()
 
 
