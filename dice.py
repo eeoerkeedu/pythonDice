@@ -27,7 +27,7 @@ tenacious = 1
 bastion = 0
 
 # Morale Modifiers
-ignoresResolves = True
+ignoresResolves = False
 resolve = 3
 Terrifying = 0
 Fearless = False
@@ -38,11 +38,15 @@ rr6Res = False
 rr1Res = False
 oblivious = False
 
+def init():
+	totalCasualties = moraleCheck()
+	print("With the selected profiles the TOTAL AVERAGE CASUALTIES are", totalCasualties)
+
 def moraleCheck():
 	wounds = defenseCheck()
 	modifiedResolve = resolve
 	if ignoresResolves == True:
-		print("Target unit ignores resolve, so no further casualties are suffered")
+		print("Target unit ignores resolve or this attack does not cause it, so no further casualties are suffered")
 		return casualties
 	if Terrifying > 0 and Fearless == False:
 		modifiedResolve -= Terrifying
@@ -68,7 +72,7 @@ def moraleCheck():
 		casualties = casualties * .5
 
 	print("With a Resolve of", resolve, "you will average", int(casualties), "additional casualties!")
-	return casualties
+	return int(casualties) + int(wounds)
 
 
 
@@ -145,6 +149,6 @@ def hitsCheck():
 	print("With a Clash of", clash, "and", attacks, "attacks, you will average", int(hits), "hits!")
 	return hits
 
-moraleCheck()
+init()
 
 
