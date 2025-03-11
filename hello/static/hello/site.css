@@ -1,12 +1,13 @@
 .message {
-	font-weight: 600;
+	font-weight: 800;
 	color: blue;
 }
 
 .navbar {
 	background-color: lightslategray;
 	font-size: 1em;
-	font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande",
+		"Lucida Sans", Arial, sans-serif;
 	color: white;
 	padding: 8px 5px 8px 5px;
 }
@@ -28,5 +29,5 @@
 
 .body-content {
 	padding: 5px;
-	font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+	font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
 }
