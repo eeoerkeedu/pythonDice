@@ -20,6 +20,10 @@ class CustomUser(AbstractUser):
     is_staff = None
     is_superuser = None
     email = models.EmailField(_("email address"), unique=True)
+    savedProfiles = models.ForeignKey(
+        "Profiles",
+        on_delete=models.CASCADE,
+    )
 
     USERNAME_FIELD = "email"
     REQUIRED_FIELDS = []
@@ -28,3 +32,6 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.email
+    
+class unitProfile():
+    pass
