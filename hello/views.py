@@ -12,6 +12,9 @@ from django.views.generic import ListView
 # def home(request):
 #     return render(request, "hello/home.html")
 
+def dice(request):
+    return render(request, "hello/dice.html")
+
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
     model = LogMessage

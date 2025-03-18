@@ -2,7 +2,7 @@
 d6 = .166666
 
 # offensive modifiers
-attacks= 25 
+attacks = 25 
 clash = 4
 reroll = False
 rr6s = False
@@ -29,8 +29,8 @@ bastion = 0
 # Morale Modifiers
 ignoresResolves = False
 resolve = 3
-Terrifying = 0
-Fearless = False
+terrifying = 0
+fearless = False
 indomitable = 0
 rrSuccess = False
 rrResolve = False
@@ -48,8 +48,8 @@ def moraleCheck():
 	if ignoresResolves == True:
 		print("Target unit ignores resolve or this attack does not cause it, so no further casualties are suffered")
 		return casualties
-	if Terrifying > 0 and Fearless == False:
-		modifiedResolve -= Terrifying
+	if terrifying > 0 and fearless == False:
+		modifiedResolve -= terrifying
 	
 	passResolve = wounds * (d6 * resolve)
 	casualties = wounds - passResolve
