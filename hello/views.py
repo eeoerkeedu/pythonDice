@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from django.shortcuts import render
 from django.shortcuts import redirect
 from hello.forms import LogMessageForm
+from hello.forms import LogAttackProfilesForm
 from hello.models import LogMessage
 from django.views.generic import ListView
 
@@ -11,9 +12,6 @@ from django.views.generic import ListView
 
 # def home(request):
 #     return render(request, "hello/home.html")
-
-def dice(request):
-    return render(request, "hello/dice.html")
 
 class HomeListView(ListView):
     """Renders the home page, with a list of all messages."""
@@ -23,6 +21,8 @@ class HomeListView(ListView):
         context = super(HomeListView, self).get_context_data(**kwargs)
         return context
 
+def dice(request):
+    return render(request, "hello/dice.html")
 
 def about(request):
     return render(request, "hello/about.html")
